@@ -7,3 +7,11 @@ For quick use just copy _ping.exe to your %WINDIR%\system32, then in run type _p
 <img alt="_ping help" src="https://github.com/IslamMouhsen/_ping/blob/main/screenshots/_ping%20usage.PNG" style="width: 500px; height: Auto; max-width: 100%;">
 
 <img alt="_ping -log output example" src="https://github.com/IslamMouhsen/_ping/blob/main/screenshots/_ping%20-log.PNG" style="width: 500px; height: Auto; max-width: 100%;">
+
+
+
+# _ping is script to manipulate window ping.exe
+# And display pings with time stamp and colorized output based on ping time threshold
+# Also you can save ping output to log file
+# colorama credits goes to Jonathan Hartley & Arnon Yaari. https://github.com/tartley/colorama
+# _ping credits goes to Islam Mouhsen
