@@ -34,13 +34,18 @@ def main():
             print(ping_module.ping())
             if isinstance(pings_count, int): pings_count -= 1  # reduce count by 1
         except KeyboardInterrupt:
-            ping_module.responses_count -= 1
-            ping_module.responses_times.pop(len(ping_module.responses_times) - 1)
+            try:
+                if ping_module.responses_count >= 1 : ping_module.responses_count -= 1
+                ping_module.responses_times.pop(len(ping_module.responses_times) - 1)
+            except Exception:
+                pass # ignore errors
             break
         except Exception as err:
             print('Error while calling ping: ' + str(err))
     # print statistics to console
-    ping_module.statistics()
+    # check if responses more than 1 to calculate statistics
+    if ping_module.responses_count >= 1:
+        ping_module.statistics()
     # Pause Console Until any key is pressed
     try:
         if not args.pause:
@@ -70,7 +75,7 @@ def parsing_config():
     try:
         args, extra = parser.parse_known_args()
         # check if timeout more than 0
-        if args.wait <= 0:
+        if args.wait <= 0: #ignore if time is less or equal 0
             timeout = 3000
         else:
             timeout = args.wait
@@ -121,7 +126,7 @@ class _Ping:
         self.lost_response_count = 0  # all lost responses count to calculate average
         self.response_min = 0  # Lowest response time
         self.response_max = 0  # Highest response time
-        self.response_avg = 0  # sum of responses devided by its count
+        self.response_avg = 0  # sum of responses divided by its count
         self.hostname = hostname
         self.timeout = timeout
         self.buffer = buffer
